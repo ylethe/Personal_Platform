@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:url(../images/background.jpg) no-repeat;
+    background-size:100%;
+}
+.login-items{
+    width: 400px;
+    height: 400px;
+    margin: 150px auto;
+}
+.form-item{
+    width: 380px;
+    height:50px;
+    margin: 10px auto;
+    color: #fff;
+}
+.login-items h1{
+    color: #fff;
+    padding:0 0 20px 120px;
+}
+.form-item input{
+    box-sizing: border-box;
+    width: 350px;
+    height: 40px;
+    border: 1px solid #fff;
+    border-radius: 12px;
+    padding-left: 10px;
+    outline: none;
+    color: #fff;
+    background-color:rgba(0,0,0,0);
+}
+input::-webkit-input-placeholder{
+    color: #fff;
+}
+.form-item button{
+    width: 350px;
+    height: 40px;
+    border: 1px solid #fff;
+    border-radius: 12px;
+    background: #fff;
+    color: #33A1C9;
+    font-size: 20px;
+    outline: none;
+}
+.checkbox{
+    width: 120px;
+    height: 15px;
+    line-height: 15px;
+    font-size: 13px;
+    float:left;
+    text-align: center;
+}
+.checkbox input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+    vertical-align:text-bottom;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 1px;
+    cursor: pointer;
+}
+input[type=checkbox]:checked{
+    border:none;
+    background: url(../images/checkbox.png) no-repeat;
+}
+.forgetPass{
+    width: 105px;
+    height: 15px;
+    font-size: 13px;
+    float: right;
+    text-align: left;
+    cursor: pointer;
+}
