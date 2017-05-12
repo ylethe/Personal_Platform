@@ -9,6 +9,12 @@ html,body{
     background:url(../images/background.jpg) no-repeat;
     background-size:100%;
 }
+.top-left{
+    color: #fff;
+    font-size: 12px;
+    padding: 10px;
+    text-decoration: none;
+}
 .login-items{
     width: 400px;
     height: 400px;

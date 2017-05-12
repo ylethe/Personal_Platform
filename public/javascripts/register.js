@@ -7,7 +7,7 @@ var regex={
 function register() {
     var name = document.getElementById('name').value;
     var pass = document.getElementById('pass').value;
-    var rePass = document.getElementById('pass').value;
+    var rePass = document.getElementById('rePass').value;
     if(!regex.password.test(pass)){
         console.log("密码格式错误");
     }
@@ -21,9 +21,9 @@ function register() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: json.stringify({
+            body: JSON.stringify({
                 name: name,
-                pass: pass
+                password: pass
             })
         }).then(function (res) {
             return res.json();

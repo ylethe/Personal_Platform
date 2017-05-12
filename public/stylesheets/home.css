@@ -30,6 +30,10 @@
     float: right;
     margin: 10px;
 }
+.top-right a{
+    text-decoration: none;
+    color: #fff;
+}
 .head-pic{
     width: 100px;
     height: 100px;

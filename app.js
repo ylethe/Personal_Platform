@@ -6,16 +6,24 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
+var multer = require('multer');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
+global.dbHandel = require('./database/dbHandle');
+global.db = mongoose.connect("mongodb://localhost:27017/nodedb");
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html',ejs.__express);
 app.set('view engine', 'html');
+
+/*app.use(bodyParser.urlencoded({extended: true}));
+app.use(multer());*/
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -25,15 +33,26 @@ app.use(bodyParser.urlencoded());
 app.use(session({
     secret: '12345',
     name: 'myApp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-    cookie: { maxAge: 1000*60*10 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
-    resave: false,
-    saveUninitialized: true
+    cookie: { maxAge: 1000*60*10 },
+    //saveUninitialized: true,
+    //resave: false,
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.use(function (req,res,next) {
+    res.locals.user = req.session.user;
+    var err = req.session.error;   //获取错误信息
+    delete req.session.error;
+    res.locals.message = "";   // 展示的信息 message
+    if(err){
+        res.locals.message = '<div class="alert alert-danger" style="margin-bottom:20px;color:red;">'+err+'</div>';
+    }
+    next();  //中间件传递
+});
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
