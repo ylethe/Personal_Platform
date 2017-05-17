@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var multer = require('multer');
 var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -29,15 +30,18 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(cookieParser('12345'));
+
 //set session
 app.use(session({
-    secret: '12345',
-    name: 'myApp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-    cookie: { maxAge: 1000*60*10 },
-    //saveUninitialized: true,
-    //resave: false,
+    secret: '123456',
+    resave: false,
+    store : new MongoStore({
+        url: 'mongodb://localhost/ga-express-session'
+    }),
+    saveUninitialized: true,
+    cookie: { secure: true }
 }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -62,15 +66,6 @@ app.use(function(req, res, next) {
 });
 
 
-//跨域
-app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With", "content-type","token");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1');
-    res.header("Content-Type", "application/json;charset=utf-8");
-    next();
-});
 /// error handlers
 
 // development error handler

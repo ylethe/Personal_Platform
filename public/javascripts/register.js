@@ -15,7 +15,7 @@ function register() {
         console.log("两次密码不一致");
     }
     else{
-        fetch('http://localhost:3000/users/register',{
+        fetch('/users/register',{
             method:'POST',
             headers:{
                 'Accept': 'application/json',

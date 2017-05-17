@@ -11,8 +11,9 @@ function login() {
         console.log("密码格式错误");
     }
     else {
-        fetch('http://localhost:3000/users/login', {
+        fetch('/users/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
